@@ -8,6 +8,9 @@ Upload your resume and an AI panel reads it like a recruiter would, then intervi
 - **Live interview room**: questions shown on screen and read aloud, you answer by voice (Web Speech API), optional camera self-view, a timer, and AI follow-up questions.
 - **Coding tests**: auto-tested JS problems (debounce, throttle, Promise.all, LRU…) run in a sandboxed Web Worker, plus machine-coding tasks reviewed by the AI.
 - **Live market research**: Gemini + Google Search grounding pulls recently reported questions for a company/role.
+- **Your own account**: a unique username + PIN. Every interview, score and report is saved in Postgres (Neon), synced across devices, and also kept offline on the device until it syncs. Hidden results are only soft-deleted.
+- **My progress**: interviews taken, cleared count, average/best score, trend, company-wise attempts and topic strength.
+- **Installable app (PWA)**: install on Android, iOS (Safari → Share → Add to Home Screen) and desktop (Chrome/Edge install button).
 - **Debrief report**: overall score, Strong Hire / Hire / Borderline / Not Yet verdict, topic scores, model answers, likely next-round questions and a study plan.
 
 Works fully **offline** (built-in bank + keyword scoring) without a key. Add a free Gemini key for the AI interviewer.
@@ -21,6 +24,6 @@ npm run dev                  # http://localhost:3000
 Use Chrome or Edge for voice answers.
 
 ## Deploy (Vercel)
-Import the GitHub repo in Vercel (framework: Next.js). Optionally add `GEMINI_API_KEY` in Project → Settings → Environment Variables so AI works for every visitor; otherwise each user can paste their own key in **Settings**.
+Import the GitHub repo in Vercel (framework: Next.js). Connect a Postgres store (Vercel → Storage → Neon) so `DATABASE_URL` is set — tables are created automatically. Optionally add `GEMINI_API_KEY` in Project → Settings → Environment Variables so AI works for every visitor; otherwise each user can paste their own key in **Settings**.
 
 Stack: Next.js 16 (App Router) · React 19 · Tailwind CSS 4 · CodeMirror · pdf.js · mammoth · Google Gemini API.
